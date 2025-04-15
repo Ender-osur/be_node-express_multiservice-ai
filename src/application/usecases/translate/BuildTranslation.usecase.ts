@@ -28,5 +28,4 @@ class BuildTranslationPromptUseCase {
   }
 }
 
-const useCase = new BuildTranslationPromptUseCase();
-export default useCase.excute.bind(useCase);
+export default BuildTranslationPromptUseCase;

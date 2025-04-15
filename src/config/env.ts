@@ -1,23 +1,27 @@
 export const Env = {
-  BASE_URL_DEEPSEEK: process.env.BASE_URL_DEEPSEEK,
-  API_KEY_DEEPSEEK: process.env.API_KEY_DEEPSEEK,
-  API_KEY_OPENAI: process.env.API_KEY_OPENAI,
+  BASE_URL_DEEPSEEK: String(process.env.BASE_URL_DEEPSEEK),
+  API_KEY_DEEPSEEK: String(process.env.API_KEY_DEEPSEEK),
+  API_KEY_OPENAI: String(process.env.API_KEY_OPENAI),
 
   MODEL: {
-    DEEPSEEK_CHAT: process.env.MODEL_DEEPSEEK_CHAT,
-    OPENAI_DALLE3: process.env.MODEL_OPENAI_DALLE3,
-    OPENAI_GPT35TURBO: process.env.MODEL_OPENAI_GPT35TURBO,
+    DEEPSEEK_CHAT: String(process.env.MODEL_DEEPSEEK_CHAT),
+    OPENAI_DALLE3: String(process.env.MODEL_OPENAI_DALLE3),
+    OPENAI_GPT35TURBO: String(process.env.MODEL_OPENAI_GPT35TURBO),
   },
 
-  CHAT_RESTRICTIONS: [process.env.CHAT_RESTRICTION_SYSTEM_1, process.env.CHAT_RESTRICTION_SYSTEM_2, process.env.CHAT_RESTRICTION_SYSTEM_3],
-
-  IMAGE_RESTRICTIONS: [
-    process.env.IMAGE_RESTRICTION_SYSTEM_1,
-    process.env.IMAGE_RESTRICTION_SYSTEM_2,
-    process.env.IMAGE_RESTRICTION_SYSTEM_3,
+  CHAT_RESTRICTIONS: [
+    String(process.env.CHAT_RESTRICTION_SYSTEM_1),
+    String(process.env.CHAT_RESTRICTION_SYSTEM_2),
+    String(process.env.CHAT_RESTRICTION_SYSTEM_3),
   ],
 
-  USER_REQUEST: process.env.USER_REQUEST,
+  IMAGE_RESTRICTIONS: [
+    String(process.env.IMAGE_RESTRICTION_SYSTEM_1),
+    String(process.env.IMAGE_RESTRICTION_SYSTEM_2),
+    String(process.env.IMAGE_RESTRICTION_SYSTEM_3),
+  ],
+
+  USER_REQUEST: String(process.env.USER_REQUEST),
 
   PORT: Number(process.env.PORT),
 };

@@ -4,13 +4,22 @@ import { ChatCompletionMessageParam } from "openai/resources/chat";
 
 type IAConversation = Record<string, ChatCompletionMessageParam[]>;
 
-const FILE_PATH = path.resolve(
-  __dirname,
-  "../../../data/ia-conversations.json"
-);
+const FILE_DIR = path.resolve(__dirname, "../../data");
+const FILE_PATH = path.join(FILE_DIR, "ia-conversations.json");
 
 class FileIAConversationRepository {
+  private async ensureFileExists(): Promise<void> {
+    try {
+      await fs.mkdir(FILE_DIR, { recursive: true });
+      await fs.access(FILE_PATH);
+    } catch {
+      await fs.writeFile(FILE_PATH, "{}", "utf-8");
+    }
+  }
+
   private async readFile(): Promise<IAConversation> {
+    await this.ensureFileExists();
+
     try {
       const content = await fs.readFile(FILE_PATH, "utf-8");
       return JSON.parse(content);
@@ -20,6 +29,7 @@ class FileIAConversationRepository {
   }
 
   private async writeFile(data: IAConversation): Promise<void> {
+    await this.ensureFileExists();
     await fs.writeFile(FILE_PATH, JSON.stringify(data, null, 2), "utf-8");
   }
 
@@ -43,4 +53,3 @@ class FileIAConversationRepository {
 const repository = new FileIAConversationRepository();
 export const getConversation = repository.getConversation.bind(repository);
 export const saveConversation = repository.saveConversation.bind(repository);
-
