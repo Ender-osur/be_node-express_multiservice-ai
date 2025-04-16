@@ -2,26 +2,40 @@ import { ChatCompletionMessageParam } from "openai/resources/chat";
 import { Env } from "../../config/env";
 
 export class PromptBuilder {
-  static buildSystemMessagesFromEnv(): ChatCompletionMessageParam[] {
+  static buildSystemMessagesFromEnv(
+    language: string,
+    text: string
+  ): ChatCompletionMessageParam[] {
     if (!Array.isArray(Env.CHAT_RESTRICTIONS)) {
-      throw new Error("CHAT_RESTRICTIONS must be an array.");
+      throw new Error("CHAT_RESTRICTIONS must be an array");
     }
 
-    return Env.CHAT_RESTRICTIONS
+    if (!String(Env.USER_REQUEST)) {
+      throw new Error("USER_REQUEST must be a string");
+    }
+
+    const allMessages = [...Env.CHAT_RESTRICTIONS]
       .filter(Boolean)
-      .map((msg) => ({
+      .join(" ")
+      .concat(String(Env.USER_REQUEST))
+      .concat(language)
+      .concat(": " + text);
+
+    return [
+      {
         role: "system",
-        content: msg || "",
-      }));
+        content: allMessages,
+      },
+    ];
   }
 
-  static buildSystemMessages(restrictions: string[]): ChatCompletionMessageParam[] {
-    return restrictions
-      .filter(Boolean)
-      .map((msg) => ({
-        role: "system",
-        content: msg,
-      }));
+  static buildSystemMessages(
+    restrictions: string[]
+  ): ChatCompletionMessageParam[] {
+    return restrictions.filter(Boolean).map((msg) => ({
+      role: "system",
+      content: msg,
+    }));
   }
 
   static buildImagePromptFromEnv(): string {

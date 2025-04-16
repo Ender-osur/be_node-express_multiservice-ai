@@ -8,8 +8,8 @@ export class DeepSeekProvider implements IAProvider {
 
   constructor() {
     this.client = new OpenAI({
-      apiKey: String(process.env.API_KEY_DEEPSEEK),
-      baseURL: String(process.env.BASE_URL_DEEPSEEK),
+      apiKey: Env.API_KEY_DEEPSEEK,
+      baseURL: Env.BASE_URL_DEEPSEEK,
     });
   }
 

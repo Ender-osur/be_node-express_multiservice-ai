@@ -9,7 +9,6 @@ class TranslateController {
       if (!codReqUser || !reqLanguage || !reqText || !modelProvider) {
         return res.status(400).json({ message: "Faltan parámetros." });
       }
-
       const useCase = new TranslateTextUseCase();
       const result = await useCase.execute({
         codReqUser,
@@ -17,7 +16,9 @@ class TranslateController {
         reqText,
         modelProvider,
       });
-
+      
+      
+      console.log("llegó aquí: ")
       res.status(200).json({ result });
     } catch (error) {
       console.error(error);

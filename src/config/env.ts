@@ -1,3 +1,9 @@
+import dotenv from "dotenv";
+
+dotenv.config({
+  path: "variables.env",
+});
+
 export const Env = {
   BASE_URL_DEEPSEEK: String(process.env.BASE_URL_DEEPSEEK),
   API_KEY_DEEPSEEK: String(process.env.API_KEY_DEEPSEEK),
