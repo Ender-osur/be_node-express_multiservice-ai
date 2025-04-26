@@ -19,7 +19,6 @@ export class OpenAIProvider implements IAProvider {
       max_tokens: 1000,
       response_format: { type: 'text' },
     });
-    console.log("está haciendo el fetch");
 
     return response.choices[0].message.content || "";
   }

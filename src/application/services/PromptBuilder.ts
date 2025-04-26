@@ -20,7 +20,7 @@ export class PromptBuilder {
       .concat(String(Env.USER_REQUEST))
       .concat(language)
       .concat(": " + text);
-
+    console.log("allMessages: ", allMessages);
     return [
       {
         role: "system",

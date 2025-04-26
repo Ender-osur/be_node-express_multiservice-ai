@@ -17,8 +17,6 @@ class TranslateController {
         modelProvider,
       });
       
-      
-      console.log("llegó aquí: ")
       res.status(200).json({ result });
     } catch (error) {
       console.error(error);
